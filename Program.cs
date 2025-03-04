@@ -1,72 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test
+namespace StringOperations
 {
-    abstract class Sample
+    class Program
     {
-        abstract public int SumNumbers(int a, int b);
-        public virtual int SubtractNumbers(int a, int b)
+        static void Main(string[] args)
         {
-            return a - b;
-        }
-
-    }
-    interface ICheckArithmeticOps
-    {
-       int MultiplyNumbers(int m,int n);
-        int DivideNumbers(int j, int k);
-    }
-    class Program : Sample,ICheckArithmeticOps
-    {
-    
-        override public int SumNumbers(int a, int b)
-        {
-            return a + b;
-        }
-        override public int SubtractNumbers(int a,int b)
-        {
-            return b - a;
-        }
-
-         public int MultiplyNumbers(int m,int n)
-        {
-            return m * n;
-        }
-       public int DivideNumbers(int j,int k)
-        {
-            int result=0;
             try
             {
-               result = j / k;
+                string input1 = "I am an automation tester and my name is kala";
+                //Length of a string
+                int lengthOfinput = input1.Length;
+                Console.WriteLine("Input String is : " + input1 +" and length of string is : "+lengthOfinput);
+
+                //Substring methods
+                string subString = input1.Substring(3);
+                Console.WriteLine("Substring String with start index : " + subString);
+                string subString2 = subString.Substring(3,7);
+                Console.WriteLine("Substring String with start and end index : " + subString2);
+
+                //Replace method
+                string afterReplacementString = input1.Replace("a", "z");
+                Console.WriteLine("String replace all \'a\' with \'e\':" + afterReplacementString);
+
+                //Convert string to char Array
+                char[] array = afterReplacementString.ToCharArray();
+                Console.WriteLine("Converted string to chararray");
+                foreach(var i in array)
+                {
+                    Console.WriteLine(i);
+                }
+
+                //Check startswith and endswith
+                Console.WriteLine("Check if string starts with prefix \'name\'----"+ afterReplacementString.StartsWith("I"));
+
+                Console.WriteLine("Check if string ends with sufix \'kala\' ---"+ afterReplacementString.EndsWith("kala"));
+
+                //clone
+                string clonedString =(string) afterReplacementString.Clone();
+                Console.WriteLine("Cloned \'afterReplacementString\' in \'clonedString\' " + clonedString);
+
+                //CompareTo()
+                string input3 = "I am an automation tester and my name is kala";
+
+                Console.WriteLine("Comparing input1 and input2 --"+input1.CompareTo(input3));
+
+                String input2 = "I work for <EPAM> systems";
+
+                //ToUpper() and ToLower()
+
+                Console.WriteLine(input1.ToLower());
+                Console.WriteLine(input2.ToUpper());
+
+                //Insert
+                Console.WriteLine("Inserting a string at the end of input 2: "+input2.Insert(input2.Length, " \'Inserted Value\'"));
+
+                //concat
+               
+                Console.WriteLine("Concating input1 and input2 using String.concat() method:"+ string.Concat(input1, input2));
+                Console.WriteLine("Concating input1 and input2 using \'+\' operator:" + input1+ input2);
+
+
+                //Remove
+                Console.WriteLine("Removing chars after index 12 : "+input2.Remove(12));
+                Console.WriteLine("Printing strings in split Array");
+                //split
+                string[] splitArray = input2.Split(' ');
+
+                foreach(string j in splitArray)
+                {
+                    Console.WriteLine(j);
+                }
+
+                //indexOf
+
+                int firstIndex = input1.IndexOf("a");
+                Console.WriteLine("First Index of a in input1 : "+ firstIndex);
+
+                int lastIndex = input1.LastIndexOf("a");
+                Console.WriteLine("Last Index of a in input1 : " + lastIndex);
+
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-            return result;
-        }
 
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Test Solution");
-            Program p = new Program();
-           
-            int sum = p.SumNumbers(10, 20);
-            Console.WriteLine(sum);
-            int sub = p.SubtractNumbers(30, 40);
-            Console.WriteLine(sub);
-            int mul = p.MultiplyNumbers(3, 9);
-            Console.WriteLine(mul);
-            int div = p.DivideNumbers(1, 0);
-            Console.WriteLine(div);
-            int actualDiv = p.DivideNumbers(6, 2);
-            Console.WriteLine(actualDiv);
-            
         }
     }
 }
